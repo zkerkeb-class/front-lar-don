@@ -4,13 +4,13 @@ import Title from '../../components/Title';
 import Button from '../../components/Button';
 import LardonLink from '../../components/LardonLink';
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Logique de connexion ici
+    
     console.log('Connexion avec', email, password);
   };
 
@@ -50,6 +50,6 @@ function Login() {
       </form>
     </div>
   );
-}
+};
 
 export default Login;

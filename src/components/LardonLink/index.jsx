@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
-function LardonLink({ to, children }) {
+const LardonLink = ({ to, children, className = '' }) => {
   return (
-    <Link to={to} className='text-blue-500 hover:underline'>
+    <Link to={to} className={'text-blue-500 hover:underline ' + className}>
       {children}
     </Link>
   );
-}
+};
 
 export default LardonLink;

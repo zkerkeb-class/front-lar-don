@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import Title from '../../components/Title';
 import Input from '../../components/Input';
 
-function Register() {
+const Register = () => {
   const [email, setEmail] = useState('');
   const [emailConfirmation, setEmailConfirmation] = useState('');
   const [password, setPassword] = useState('');
@@ -14,6 +14,12 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Enregistrement avec', username, email, password);
+    console.log('Same values passwords', validationSameValues(password, passwordConfirmation))
+    console.log('Same values emails', validationSameValues(email, emailConfirmation))
+  };
+
+  const validationSameValues = (target1, target2) => {
+    return target1 == target2;
   };
 
   return (
@@ -81,6 +87,6 @@ function Register() {
       </form>
     </div>
   );
-}
+};
 
 export default Register;

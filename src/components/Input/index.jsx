@@ -20,7 +20,7 @@ const Input = ({
   };
 
   return (
-    <>
+    <div className={className}>
       <label
         htmlFor={id}
         className='block text-gray-700 text-sm font-bold mb-2'
@@ -41,7 +41,7 @@ const Input = ({
           className
         }
       />
-    </>
+    </div>
   );
 };
 
