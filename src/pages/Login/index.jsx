@@ -3,6 +3,7 @@ import Input from '../../components/Input';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
 import LardonLink from '../../components/LardonLink';
+import AuthenticationService from '../../services/auth-service';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,8 +11,12 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    console.log('Connexion avec', email, password);
+
+    AuthenticationService.login(email, password).then((isLogged) => {
+      if (isLogged) {
+        window.location.href = '/';
+      }
+    });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,23 +6,46 @@ import {
   Navigate,
 } from 'react-router-dom';
 import './App.css';
+import Plans from './pages/Plans';
+import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Plans from './pages/Plans';
+import AuthenticationService from './services/auth-service';
 
 const App = () => {
+  const [isLogged, setIsLogged] = useState(
+    AuthenticationService.isAuthenticated()
+  );
+  const navigation = [
+    { to: '/login', element: <Login />, nav: false },
+    { to: '/register', element: <Register />, nav: false },
+    {
+      to: '/register',
+      label: 'Register',
+      element: <Register />,
+      nav: !isLogged,
+    },
+    { to: '/plans', label: 'Plans', element: <Plans /> },
+  ];
+
   return (
     <Router>
-      <div className='p-6 bg-slate-200 min-h-screen'>
+      <Navbar navigation={navigation}></Navbar>
+      <div
+        className={'p-6 bg-slate-200 min-h-screen ' + (isLogged ? 'mt-16' : '')}
+      >
         <Routes>
-          <Route path='/' element={<Navigate replace to='/login' />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/plans' element={<Plans />} />
+          <Route
+            path='/'
+            element={<Navigate replace to={isLogged ? '/home' : '/login'} />}
+          />
+          {navigation.map((route) => (
+            <Route key={route.to} path={route.to} element={route.element} />
+          ))}
         </Routes>
       </div>
     </Router>
   );
-}
+};
 
 export default App;
