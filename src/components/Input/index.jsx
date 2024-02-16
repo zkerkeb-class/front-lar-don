@@ -26,7 +26,9 @@ const Input = ({
         className='block text-gray-700 text-sm font-bold mb-2'
       >
         {label}
+        {required ? <span className='text-red-500'> *</span> : ''}
       </label>
+
       <input
         id={id}
         type={type}

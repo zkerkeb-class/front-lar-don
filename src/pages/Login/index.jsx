@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Importez Link de react-router-dom
+import React, { useState } from 'react';
 import Input from '../../components/Input';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
@@ -19,6 +18,7 @@ function Login() {
     <div id='login'>
       <form onSubmit={handleSubmit}>
         <Title level='2'>Connexion</Title>
+
         <div className='mb-4'>
           <Input
             label='Email'

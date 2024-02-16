@@ -1,77 +1,82 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import LardonLink from '../../components/LardonLink';
+import Button from '../../components/Button';
+import Title from '../../components/Title';
+import Input from '../../components/Input';
 
 function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState('');
+  const [emailConfirmation, setEmailConfirmation] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [username, setUsername] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Enregistrement avec", username, email, password);
+    console.log('Enregistrement avec', username, email, password);
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      >
-        <h2 className="mb-6 text-center text-2xl font-bold">Enregistrement</h2>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="username"
-          >
-            Nom d'utilisateur
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
+    <div id='register'>
+      <form onSubmit={handleSubmit}>
+        <Title level='2'>Inscription</Title>
+
+        <div className='mb-4'>
+          <Input
+            label="Nom d'utilisateur"
+            type='text'
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={setUsername}
             required
           />
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="email"
+
+        <div className='mb-4'>
+          <Input
+            label='Email'
+            type='email'
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={setEmail}
             required
           />
         </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Mot de passe
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
+
+        <div className='mb-4'>
+          <Input
+            label="Confirmation de l'email"
+            type='email'
+            value={emailConfirmation}
+            onChange={setEmailConfirmation}
+            required
+          />
+        </div>
+
+        <div className='mb-6'>
+          <Input
+            label='Mot de passe'
+            type='password'
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={setPassword}
             required
           />
         </div>
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            S'enregistrer
-          </button>
+
+        <div className='mb-6'>
+          <Input
+            label='Confirmation du mot de passe'
+            type='password'
+            value={passwordConfirmation}
+            onChange={setPasswordConfirmation}
+            required
+          />
+        </div>
+
+        <div className='flex items-center justify-between'>
+          <Button type='submit'>S'inscrire</Button>
+
+          <LardonLink to='/login'>
+            Vous avez déjà un compte ? Se connecter
+          </LardonLink>
         </div>
       </form>
     </div>
