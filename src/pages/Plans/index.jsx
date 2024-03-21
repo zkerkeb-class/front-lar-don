@@ -1,42 +1,9 @@
 import React from 'react';
 import Text from '../../components/Text';
 import Title from '../../components/Title';
-import Plan from '../../components/Plan';
+import 'https://js.stripe.com/v3/pricing-table.js';
 
 const Plans = () => {
-  const plans = [
-    {
-      id: 1,
-      name: 'Plan de démarrage',
-      advantages: [
-        'Accès aux fonctionnalités de base',
-        'Support par e-mail',
-        'Mises à jour mensuelles',
-      ],
-      price: '10€/mois',
-    },
-    {
-      id: 2,
-      name: 'Plan Pro',
-      advantages: [
-        'Accès à toutes les fonctionnalités',
-        'Support client prioritaire',
-        'Mises à jour hebdomadaires',
-      ],
-      price: '30€/mois',
-    },
-    {
-      id: 3,
-      name: 'Plan Entreprise',
-      advantages: [
-        'Accès à toutes les fonctionnalités',
-        'Gestionnaire de compte dédié',
-        'Mises à jour quotidiennes',
-      ],
-      price: '70€/mois',
-    },
-  ];
-
   return (
     <div id='plans'>
       <Title>Tarifs</Title>
@@ -46,17 +13,10 @@ const Plans = () => {
         proposons :
       </Text>
 
-      <div className='flex justify-around'>
-        {plans.map((plan) => (
-          <Plan
-            className='w-1/3 mx-4'
-            key={plan.id}
-            name={plan.name}
-            price={plan.price}
-            items={plan.advantages}
-          />
-        ))}
-      </div>
+      <stripe-pricing-table
+        pricing-table-id='prctbl_1OkTifDWGS6KsEMg3GvK58iH'
+        publishable-key='pk_test_51OkSH5DWGS6KsEMgBrRmVZolxOvGhkKW4LQknuB4fZSCrfJlMfm3WYiVNz06oN1RuWQFjXibcXmMHSQAEOUSfXrk002RSmIE1Q'
+      ></stripe-pricing-table>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AuthenticationService from './services/auth-service';
+import Home from './pages/Home';
 
 const App = () => {
   const [isLogged, setIsLogged] = useState(
@@ -26,6 +27,11 @@ const App = () => {
       nav: !isLogged,
     },
     { to: '/plans', label: 'Plans', element: <Plans /> },
+    {
+      to: '/home',
+      element: <Home />,
+      nav: false,
+    },
   ];
 
   return (
