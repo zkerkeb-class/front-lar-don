@@ -1,56 +1,64 @@
-import React, { useState } from "react";
-import Input from "../../components/Input";
-import Title from "../../components/Title";
-import Button from "../../components/Button";
-import LardonLink from "../../components/LardonLink";
-import AuthenticationService from "../../services/auth-service";
+import React, { useState } from 'react';
+import Input from '../../components/Input';
+import Title from '../../components/Title';
+import Button from '../../components/Button';
+import LardonLink from '../../components/LardonLink';
+import AuthenticationService from '../../services/auth-service';
+import { useNavigate } from 'react-router-dom';
+import Alert from '../../components/Alert';
 
 const Login = () => {
-  const [identifier, setIdentifier] = useState(""); // Renommez 'email' en 'identifier' pour plus de clarté
-  const [password, setPassword] = useState("");
+  const [identifier, setIdentifier] = useState(''); // Renommez 'email' en 'identifier' pour plus de clarté
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Assurez-vous que la méthode login de AuthenticationService peut gérer un identifiant ou un email
-    AuthenticationService.login(identifier, password).then((isLogged) => {
-      if (isLogged) {
-        // Si l'utilisateur est bien connecté, redirigez vers la page d'accueil
-        window.location.href = "/";
-      } else {
-        // Gestion optionnelle de l'échec de la connexion
-        alert("Échec de la connexion. Veuillez vérifier vos identifiants.");
-      }
-    });
+  const handleSubmit = async () => {
+    await AuthenticationService.login({
+      usernameOrEmail: identifier,
+      password: password,
+    })
+      .then((response) => {
+        localStorage.setItem('isAuthenticated', 'true');
+        navigate('/plans');
+      })
+      .catch((error) => {
+        setError(error.response.data.message);
+      });
   };
 
   return (
-    <div id="login">
-      <form onSubmit={handleSubmit}>
-        <Title level="2">Connexion</Title>
+    <div id='login'>
+      <form>
+        <Title level='2'>Connexion</Title>
 
-        <div className="mb-4">
+        <div className='mb-4'>
           <Input
-            label="Identifiant ou Email" // Mettez à jour le label pour refléter le changement
-            type="text" // Modifiez le type en 'text' pour accepter les deux formats
+            label='Identifiant ou Email' // Mettez à jour le label pour refléter le changement
+            type='text' // Modifiez le type en 'text' pour accepter les deux formats
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
             required
           />
         </div>
 
-        <div className="mb-6">
+        <div className='mb-6'>
           <Input
-            label="Mot de passe"
-            type="password"
+            label='Mot de passe'
+            type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
 
-        <div className="flex items-center justify-between">
-          <Button type="submit">Se connecter</Button>
-          <LardonLink to="/register">
+        {error && <Alert type='error'>{error}</Alert>}
+
+        <div className='flex items-center justify-between'>
+          <Button type='button' onClick={() => handleSubmit}>
+            Se connecter
+          </Button>
+          <LardonLink to='/register'>
             Pas encore de compte ? S'inscrire
           </LardonLink>
         </div>

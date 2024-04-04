@@ -1,4 +1,4 @@
-const Button = ({ children, type = 'button', className = '', ...props }) => {
+const Button = ({ children, type = 'button', className = '', onClick = () => {}, ...props }) => {
   return (
     <button
       type={type}
@@ -7,6 +7,7 @@ const Button = ({ children, type = 'button', className = '', ...props }) => {
         className
       }
       {...props}
+      onClick={onClick()}
     >
       {children}
     </button>

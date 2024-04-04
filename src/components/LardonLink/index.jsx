@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const LardonLink = ({
@@ -8,10 +7,6 @@ const LardonLink = ({
   active = false,
   onClick = () => {},
 }) => {
-  useEffect(() => {
-    console.log(to, active);
-  }, []);
-
   return (
     <Link
       to={to}
