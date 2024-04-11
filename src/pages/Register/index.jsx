@@ -34,8 +34,7 @@ const Register = () => {
     const body = { username, email, password };
 
     await AuthenticationService.register(body)
-      .then((response) => {
-        localStorage.setItem('token', response.data._id);
+      .then(() => {
         navigate('/home');
       })
       .catch((error) => {

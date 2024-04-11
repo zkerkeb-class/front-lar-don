@@ -18,12 +18,11 @@ const Login = () => {
       usernameOrEmail: identifier,
       password: password,
     })
-      .then((response) => {
-        localStorage.setItem('token', response.data._id);
+      .then(() => {
         navigate('/plans');
       })
       .catch((error) => {
-        setError(error.response.data.message);
+        setError(error?.response?.data?.message);
       });
   };
 
