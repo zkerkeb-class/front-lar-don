@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
   useLocation,
+  useNavigate,
 } from 'react-router-dom';
 import './App.css';
 import Plans from './pages/Plans';
@@ -27,10 +28,21 @@ const RouterContent = () => {
     AuthenticationService.isAuthenticated()
   );
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLogged(AuthenticationService.isAuthenticated());
   }, [location]);
+
+  useEffect(() => {
+    if (
+      !isLogged &&
+      location.pathname !== '/login' &&
+      location.pathname !== '/register'
+    ) {
+      navigate('/login');
+    }
+  }, [isLogged]);
 
   return (
     <div

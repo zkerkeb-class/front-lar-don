@@ -22,7 +22,7 @@ const Plans = () => {
         proposons :
       </Text>
 
-      {user.stripeId ? (
+      {user?.stripeId ? (
         <stripe-pricing-table
           pricing-table-id='prctbl_1OkTifDWGS6KsEMg3GvK58iH'
           publishable-key='pk_test_51OkSH5DWGS6KsEMgBrRmVZolxOvGhkKW4LQknuB4fZSCrfJlMfm3WYiVNz06oN1RuWQFjXibcXmMHSQAEOUSfXrk002RSmIE1Q'

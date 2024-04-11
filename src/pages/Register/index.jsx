@@ -17,6 +17,7 @@ const Register = () => {
     `test-${Date.now()}`
   );
   const [username, setUsername] = useState(`test-${Date.now()}`);
+  const [phoneNumber, setPhoneNumber] = useState('33612345678');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -31,14 +32,19 @@ const Register = () => {
       return;
     }
 
-    const body = { username, email, password };
+    if (phoneNumber.length !== 11) {
+      setError('Le numéro de téléphone doit être au format (+)33XXXXXXXXX.');
+      return;
+    }
+
+    const body = { username, email, password, phoneNumber };
 
     await AuthenticationService.register(body)
       .then(() => {
-        navigate('/home');
+        navigate('/plans');
       })
       .catch((error) => {
-        setError(error.response.data.message);
+        setError(error?.response?.data?.message);
       });
   };
 
@@ -73,7 +79,16 @@ const Register = () => {
             required
           />
         </div>
-        <div className='mb-6'>
+        <div className='mb-4'>
+          <Input
+            label='Numéro de téléphone'
+            type='tel'
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+          />
+        </div>
+        <div className='mb-4'>
           <Input
             label='Mot de passe'
             type='password'
@@ -82,7 +97,7 @@ const Register = () => {
             required
           />
         </div>
-        <div className='mb-6'>
+        <div className='mb-4'>
           <Input
             label='Confirmation du mot de passe'
             type='password'
@@ -94,7 +109,7 @@ const Register = () => {
 
         {error && <Alert type='error'>{error}</Alert>}
 
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between pt-2'>
           <Button type='button' onClick={() => handleSubmit}>
             S'inscrire
           </Button>
