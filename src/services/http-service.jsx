@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const httpService = axios.create({
-  baseURL: process.env.URL_API, // Replace with your API base URL
+  baseURL: process.env.REACT_APP_URL_API, // Replace with your API base URL
   timeout: 5000, // Set a timeout value in milliseconds
   headers: {
     'Content-Type': 'application/json', // Set the default content type

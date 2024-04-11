@@ -8,11 +8,15 @@ import Alert from '../../components/Alert';
 import AuthenticationService from '../../services/auth-service';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [emailConfirmation, setEmailConfirmation] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState(`test-${Date.now()}@mail.com`);
+  const [emailConfirmation, setEmailConfirmation] = useState(
+    `test-${Date.now()}@mail.com`
+  );
+  const [password, setPassword] = useState(`test-${Date.now()}`);
+  const [passwordConfirmation, setPasswordConfirmation] = useState(
+    `test-${Date.now()}`
+  );
+  const [username, setUsername] = useState(`test-${Date.now()}`);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -31,11 +35,11 @@ const Register = () => {
 
     await AuthenticationService.register(body)
       .then((response) => {
-        localStorage.setItem('isAuthenticated', 'true');
-        navigate('/');
+        localStorage.setItem('token', response.data._id);
+        navigate('/home');
       })
       .catch((error) => {
-        setError(error.response.data.message)
+        setError(error.response.data.message);
       });
   };
 
@@ -92,7 +96,9 @@ const Register = () => {
         {error && <Alert type='error'>{error}</Alert>}
 
         <div className='flex items-center justify-between'>
-          <Button type='button' onClick={() => handleSubmit}>S'inscrire</Button>
+          <Button type='button' onClick={() => handleSubmit}>
+            S'inscrire
+          </Button>
           <LardonLink to='/login'>
             Vous avez déjà un compte ? Se connecter
           </LardonLink>

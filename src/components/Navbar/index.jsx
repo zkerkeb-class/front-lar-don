@@ -18,10 +18,7 @@ const Navbar = ({ navigation }) => {
   }, [location]);
 
   const handleLogout = () => {
-    AuthenticationService.logout().then(() => {
-      setIsLogged(false);
-      return navigate('/login');
-    });
+    AuthenticationService.logout()
   };
 
   return isLogged ? (
@@ -51,7 +48,6 @@ const Navbar = ({ navigation }) => {
         <LardonLink
           to='/login'
           className='text-lg ml-4'
-          active={location.pathname === '/login'}
           onClick={handleLogout}
         >
           {AuthenticationService.isAuthenticated() ? 'Déconnexion' : 'Login'}

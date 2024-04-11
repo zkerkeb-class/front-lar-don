@@ -19,7 +19,7 @@ const Login = () => {
       password: password,
     })
       .then((response) => {
-        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('token', response.data._id);
         navigate('/plans');
       })
       .catch((error) => {
