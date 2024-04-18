@@ -3,7 +3,7 @@ import Title from '../../components/Title';
 const Home = () => {
   return (
     <div>
-      <Title>Home</Title>
+      <Title>Accueil</Title>
     </div>
   );
 };

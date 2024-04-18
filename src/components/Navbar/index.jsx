@@ -1,11 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import LardonLink from '../LardonLink';
 import AuthenticationService from '../../services/auth-service';
 import { useEffect, useState } from 'react';
 
 const Navbar = ({ navigation }) => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(
     AuthenticationService.isAuthenticated()
   );
@@ -18,7 +17,7 @@ const Navbar = ({ navigation }) => {
   }, [location]);
 
   const handleLogout = () => {
-    AuthenticationService.logout()
+    AuthenticationService.logout();
   };
 
   return isLogged ? (
@@ -45,11 +44,7 @@ const Navbar = ({ navigation }) => {
             </LardonLink>
           ))}
 
-        <LardonLink
-          to='/login'
-          className='text-lg ml-4'
-          onClick={handleLogout}
-        >
+        <LardonLink to='/login' className='text-lg ml-4' onClick={handleLogout}>
           {AuthenticationService.isAuthenticated() ? 'Déconnexion' : 'Login'}
         </LardonLink>
       </div>

@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import AuthenticationService from './services/auth-service';
 import Home from './pages/Home';
+import ConfirmSubscription from './pages/ConfirmSubscription';
 
 const App = () => {
   return (
@@ -74,6 +75,7 @@ const RouterContent = () => {
           element={isLogged ? <Home /> : <Navigate to='/login' />}
         />
         <Route path='/plans' element={<Plans />} />
+        <Route path='/confirm-subscription' element={<ConfirmSubscription />} />
       </Routes>
     </div>
   );
