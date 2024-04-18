@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,15 +6,15 @@ import {
   Navigate,
   useLocation,
   useNavigate,
-} from 'react-router-dom';
-import './App.css';
-import Plans from './pages/Plans';
-import Navbar from './components/Navbar';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import AuthenticationService from './services/auth-service';
-import Home from './pages/Home';
-import ConfirmSubscription from './pages/ConfirmSubscription';
+} from "react-router-dom";
+import "./App.css";
+import Plans from "./pages/Plans";
+import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AuthenticationService from "./services/auth-service";
+import Home from "./pages/Home";
+import ConfirmSubscription from "./pages/ConfirmSubscription";
 
 const App = () => {
   return (
@@ -38,44 +38,42 @@ const RouterContent = () => {
   useEffect(() => {
     if (
       !isLogged &&
-      location.pathname !== '/login' &&
-      location.pathname !== '/register'
+      location.pathname !== "/login" &&
+      location.pathname !== "/register"
     ) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [isLogged]);
 
   return (
-    <div
-      className={'p-6 bg-slate-200 min-h-screen ' + (isLogged ? 'mt-16' : '')}
-    >
+    <div className={"p-6 bg-lolDark min-h-screen " + (isLogged ? "mt-16" : "")}>
       <Navbar
         navigation={[
-          { to: '/home', label: 'Accueil' },
-          { to: '/plans', label: 'Plans' },
+          { to: "/home", label: "Accueil" },
+          { to: "/plans", label: "Plans" },
         ]}
       />
       <Routes>
         <Route
-          path='/'
+          path="/"
           element={
-            isLogged ? <Navigate to='/home' /> : <Navigate to='/login' />
+            isLogged ? <Navigate to="/home" /> : <Navigate to="/login" />
           }
         />
         <Route
-          path='/login'
-          element={isLogged ? <Navigate to='/home' /> : <Login />}
+          path="/login"
+          element={isLogged ? <Navigate to="/home" /> : <Login />}
         />
         <Route
-          path='/register'
-          element={isLogged ? <Navigate to='/home' /> : <Register />}
+          path="/register"
+          element={isLogged ? <Navigate to="/home" /> : <Register />}
         />
         <Route
-          path='/home'
-          element={isLogged ? <Home /> : <Navigate to='/login' />}
+          path="/home"
+          element={isLogged ? <Home /> : <Navigate to="/login" />}
         />
-        <Route path='/plans' element={<Plans />} />
-        <Route path='/confirm-subscription' element={<ConfirmSubscription />} />
+        <Route path="/plans" element={<Plans />} />
+        <Route path="/confirm-subscription" element={<ConfirmSubscription />} />
       </Routes>
     </div>
   );

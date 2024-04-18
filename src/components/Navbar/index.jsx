@@ -1,7 +1,14 @@
-import { useLocation } from 'react-router-dom';
-import LardonLink from '../LardonLink';
-import AuthenticationService from '../../services/auth-service';
-import { useEffect, useState } from 'react';
+import { useLocation } from "react-router-dom";
+import logoImage from "../../assets/logo.png";
+import LardonLink from "../LardonLink";
+import AuthenticationService from "../../services/auth-service";
+import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSignOutAlt,
+  faHome,
+  faClipboardList,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = ({ navigation }) => {
   const location = useLocation();
@@ -9,11 +16,8 @@ const Navbar = ({ navigation }) => {
     AuthenticationService.isAuthenticated()
   );
 
-  const getIsLogged = () => {
-    setIsLogged(AuthenticationService.isAuthenticated());
-  };
   useEffect(() => {
-    getIsLogged();
+    setIsLogged(AuthenticationService.isAuthenticated());
   }, [location]);
 
   const handleLogout = () => {
@@ -21,37 +25,41 @@ const Navbar = ({ navigation }) => {
   };
 
   return isLogged ? (
-    <nav className='fixed top-0 left-0 right-0 flex justify-between items-center bg-slate-200 shadow-xl h-16 px-4'>
+    <nav className="fixed top-0 left-0 right-0 flex justify-between items-center bg-lolDark px-6 py-3 shadow-md h-20 z-30 text-white font-sans">
       <LardonLink
-        to='/'
-        className='text-lg'
-        active={['/', '/home'].includes(location.pathname)}
+        to="/"
+        className="flex items-center text-lolGold hover:text-white transition duration-300 ease-in-out"
       >
+        <img src={logoImage} alt="Lardon Logo" className="h-12 mr-3" />{" "}
+        {/* Adjust the size as needed */}
         Lardon
       </LardonLink>
 
-      <div className='flex'>
+      <div className="flex items-center">
         {navigation
           .filter((route) => route.nav !== false)
           .map((route) => (
             <LardonLink
               key={route.to}
               to={route.to}
-              className='text-lg ml-4'
+              className="flex items-center text-lg text-white hover:text-lolGold ml-10 transition duration-300 ease-in-out"
               active={location.pathname === route.to}
             >
+              <FontAwesomeIcon icon={faClipboardList} className="mr-2" />
               {route.label}
             </LardonLink>
           ))}
 
-        <LardonLink to='/login' className='text-lg ml-4' onClick={handleLogout}>
-          {AuthenticationService.isAuthenticated() ? 'Déconnexion' : 'Login'}
-        </LardonLink>
+        <button
+          onClick={handleLogout}
+          className="flex items-center text-lg hover:text-lolGold ml-10 transition duration-300 ease-in-out"
+        >
+          <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+          Déconnexion
+        </button>
       </div>
     </nav>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default Navbar;
