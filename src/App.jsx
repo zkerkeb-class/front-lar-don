@@ -16,6 +16,7 @@ import AuthenticationService from "./services/auth-service";
 import Home from "./pages/Home";
 import ConfirmSubscription from "./pages/ConfirmSubscription";
 import ChampSelect from "./pages/ChampSelect";
+import ChampionChatPage from "./pages/ChampionChatPage";
 
 const App = () => {
   return (
@@ -76,6 +77,7 @@ const RouterContent = () => {
         <Route path="/plans" element={<Plans />} />
         <Route path="/confirm-subscription" element={<ConfirmSubscription />} />
         <Route path="/champselect" element={<ChampSelect />} />
+        <Route path="/champion/:championId" element={<ChampionChatPage />} />
       </Routes>
     </div>
   );

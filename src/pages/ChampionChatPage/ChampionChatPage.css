@@ -1,0 +1,143 @@
+.chat-container {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.8); /* Fond semi-transparent pour la chatbox */
+    backdrop-filter: blur(10px); /* Flou de l'arrière-plan pour la lisibilité */
+    border: 1px solid #ccc;
+  }
+  
+  .chat-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .champion-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin-right: 10px;
+  }
+  
+  .champion-name {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .champion-title {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .chat-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(50%);
+    z-index: -1;
+  }
+  
+  .messages {
+    position: relative;
+    z-index: 1;
+    height: 300px;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+  
+  /* Style pour les messages individuels. */
+  .message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Style pour les messages de l'utilisateur. */
+  .message.user .text {
+    margin-left: auto;
+    background-color: #d1ecf1;
+  }
+  
+  /* Style pour les messages du champion. */
+  .message.champion .text {
+    background-color: #eee;
+  }
+  
+  /* Style pour la photo de profil à côté des messages du champion. */
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  
+  /* Style pour le texte du message. */
+  .text {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+  }
+  
+  /* Style pour le formulaire d'envoi de message. */
+  .send-message-form {
+    display: flex;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Style pour le champ de saisie du message. */
+  .message-input {
+    flex-grow: 1;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+  }
+  
+  /* Style pour le bouton d'envoi. */
+  .send-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Style pour le bouton d'envoi au survol. */
+  .send-button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Ajoutez ce style pour l'animation de saisie du bot */
+.bot-writing-animation {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #666;
+  }
+  
+  @keyframes typing {
+    0%, 100% { content: 'Le champion est en train d\'écrire'; }
+    25% { content: 'Le champion est en train d\'écrire.'; }
+    50% { content: 'Le champion est en train d\'écrire..'; }
+    75% { content: 'Le champion est en train d\'écrire...'; }
+  }
+  
+  .bot-writing-animation::after {
+    content: '';
+    animation: typing 2s steps(3, end) infinite;
+  }
+
+  .typing-indicator {
+    color: #aaa;
+    padding: 0.5rem;
+    text-align: left;
+  }
+  
+  
