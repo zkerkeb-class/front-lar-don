@@ -15,11 +15,12 @@ import Register from "./pages/Register";
 import AuthenticationService from "./services/auth-service";
 import Home from "./pages/Home";
 import ConfirmSubscription from "./pages/ConfirmSubscription";
+import ChampSelect from "./pages/ChampSelect";
 
 const App = () => {
   return (
     <Router>
-      <RouterContent></RouterContent>
+      <RouterContent />
     </Router>
   );
 };
@@ -36,14 +37,16 @@ const RouterContent = () => {
   }, [location]);
 
   useEffect(() => {
+    // Ajuster pour permettre l'accès à Home même quand déconnecté
     if (
       !isLogged &&
       location.pathname !== "/login" &&
-      location.pathname !== "/register"
+      location.pathname !== "/register" &&
+      location.pathname !== "/home" // Permettre d'accéder à Home
     ) {
       navigate("/login");
     }
-  }, [isLogged]);
+  }, [isLogged, location.pathname]); // Écouter aussi les changements de location.pathname
 
   return (
     <div
@@ -53,15 +56,11 @@ const RouterContent = () => {
         navigation={[
           { to: "/home", label: "Accueil" },
           { to: "/plans", label: "Plans" },
+          { to: "/champselect", label: "Champions" },
         ]}
       />
       <Routes>
-        <Route
-          path="/"
-          element={
-            isLogged ? <Navigate to="/home" /> : <Navigate to="/login" />
-          }
-        />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route
           path="/login"
           element={isLogged ? <Navigate to="/home" /> : <Login />}
@@ -72,10 +71,11 @@ const RouterContent = () => {
         />
         <Route
           path="/home"
-          element={isLogged ? <Home /> : <Navigate to="/login" />}
+          element={<Home />} // Enlever la redirection conditionnelle pour toujours afficher Home
         />
         <Route path="/plans" element={<Plans />} />
         <Route path="/confirm-subscription" element={<ConfirmSubscription />} />
+        <Route path="/champselect" element={<ChampSelect />} />
       </Routes>
     </div>
   );
