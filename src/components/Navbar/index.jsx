@@ -10,7 +10,8 @@ import {
   faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({ navigation }) => {
+const Navbar = ({ navigation = [] }) => {
+  // Assign a default value to navigation
   const location = useLocation();
   const [isLogged, setIsLogged] = useState(
     AuthenticationService.isAuthenticated()
@@ -25,13 +26,12 @@ const Navbar = ({ navigation }) => {
   };
 
   return isLogged ? (
-    <nav className="fixed top-0 left-0 right-0 flex justify-between items-center bg-lolDark px-6 py-3 shadow-md h-20 z-30 text-white font-sans">
+    <nav className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between w-full px-6 py-3 shadow-md bg-lolDark h-24">
       <LardonLink
         to="/"
-        className="flex items-center text-lolGold hover:text-white transition duration-300 ease-in-out"
+        className="flex items-center text-white hover:text-lolGold transition duration-300 ease-in-out"
       >
-        <img src={logoImage} alt="Lardon Logo" className="h-12 mr-3" />{" "}
-        {/* Adjust the size as needed */}
+        <img src={logoImage} alt="Lardon Logo" className="h-16 mr-4" />
         Lardon
       </LardonLink>
 
@@ -42,17 +42,19 @@ const Navbar = ({ navigation }) => {
             <LardonLink
               key={route.to}
               to={route.to}
-              className="flex items-center text-lg text-white hover:text-lolGold ml-10 transition duration-300 ease-in-out"
+              className="flex items-center text-lg text-white hover:text-lolGold ml-6 transition duration-300 ease-in-out"
               active={location.pathname === route.to}
             >
-              <FontAwesomeIcon icon={faClipboardList} className="mr-2" />
+              {route.icon && (
+                <FontAwesomeIcon icon={route.icon} className="mr-2" />
+              )}
               {route.label}
             </LardonLink>
           ))}
 
         <button
           onClick={handleLogout}
-          className="flex items-center text-lg hover:text-lolGold ml-10 transition duration-300 ease-in-out"
+          className="flex items-center text-lg text-white hover:text-lolGold ml-6 transition duration-300 ease-in-out"
         >
           <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
           Déconnexion

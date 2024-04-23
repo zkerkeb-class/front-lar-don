@@ -46,7 +46,9 @@ const RouterContent = () => {
   }, [isLogged]);
 
   return (
-    <div className={"p-6 bg-lolDark min-h-screen " + (isLogged ? "mt-16" : "")}>
+    <div
+      className={"p-6 bg-slate-200 min-h-screen " + (isLogged ? "mt-16" : "")}
+    >
       <Navbar
         navigation={[
           { to: "/home", label: "Accueil" },

@@ -1,40 +1,32 @@
-import { saveUser } from '../utils/save-user';
-import httpService from './http-service';
+import httpService from "./http-service";
 
 const AuthenticationService = {
   isAuthenticated: () => {
-    // Check if the user is authenticated by looking for the user user
-    return (
-      localStorage.getItem('user') &&
-      JSON.parse(localStorage.getItem('user'))._id
-    );
+    const token = localStorage.getItem("authToken");
+    return !!token; // Plus robuste si vous ajoutez une vérification de la validité du token
+  },
+  storeToken: (token) => {
+    localStorage.setItem("authToken", token);
+  },
+  removeToken: () => {
+    localStorage.removeItem("authToken");
   },
   login: async (body) => {
     return await httpService.post(`/users/login`, body).then((response) => {
-      saveUser({
-        ...response.data.user,
-        customerSecretId: response.data.customerSecretId,
-      });
+      if (response.data.token) {
+        this.storeToken(response.data.token); // Stockez le token au lieu de l'utilisateur
+      }
       return response;
     });
   },
-  register: async (body) => {
-    return await httpService.post(`/users/`, body).then((response) => {
-      saveUser({
-        ...response.data.user,
-        customerSecretId: response.data.customerSecretId,
-      });
-      return response;
-    });
+  loginWithGoogle: (token) => {
+    this.storeToken(token);
   },
   logout: () => {
-    // Remove the user to log out the user
-    localStorage.removeItem('user');
+    this.removeToken(); // Supprimez le token lors de la déconnexion
   },
-  getCurrentUser: async () => {
-    const user = localStorage.getItem('user');
-    if (!user) return null;
-    return JSON.parse(user);
+  getCurrentToken: () => {
+    return localStorage.getItem("authToken");
   },
 };
 

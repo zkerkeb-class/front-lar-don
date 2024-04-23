@@ -10,6 +10,20 @@ body {
   height: 100%;
 }
 
+.carousel-container .carousel-image-container {
+  height: 400px; /* ou la hauteur que vous souhaitez fixer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* pour éviter le débordement de l'image */
+}
+
+.carousel-container .carousel-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain; /* pour conserver les proportions de l'image */
+}
+
 @layer utilities {
   .animate-bounce {
     animation: bounce 1s infinite;

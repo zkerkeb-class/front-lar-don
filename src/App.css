@@ -13,6 +13,19 @@
   }
 }
 
+.pricing-table-wrapper {
+  padding: 2rem;
+  margin: 2rem auto;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Une ombre subtile */
+  border-radius: 8px; /* Bords arrondis pour le conteneur */
+  background: white; /* Un fond blanc pour faire ressortir la table */
+}
+
+.stripe-pricing-table {
+  max-width: 1000px; /* Limitez la largeur de la table de tarifs */
+  margin: 0 auto; /* Centrer la table de tarifs */
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +48,5 @@
   to {
     transform: rotate(360deg);
   }
+  
 }
