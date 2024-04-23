@@ -1,12 +1,12 @@
-import { saveUser } from "../utils/save-user";
-import httpService from "./http-service";
+import { saveUser } from '../utils/save-user';
+import httpService from './http-service';
 
 const AuthenticationService = {
   isAuthenticated: () => {
     // Check if the user is authenticated by looking for the user user
     return (
-      localStorage.getItem("user") &&
-      JSON.parse(localStorage.getItem("user"))._id
+      localStorage.getItem('user') &&
+      JSON.parse(localStorage.getItem('user'))._id
     );
   },
   login: async (body) => {
@@ -17,6 +17,17 @@ const AuthenticationService = {
       });
       return response;
     });
+  },
+  loginWithGoogle: async (body) => {
+    return await httpService
+      .post('/users/login-google', body)
+      .then((response) => {
+        saveUser({
+          ...response.data.user,
+          customerSecretId: response.data.customerSecretId,
+        });
+        return response;
+      });
   },
   register: async (body) => {
     return await httpService.post(`/users/`, body).then((response) => {
@@ -29,10 +40,10 @@ const AuthenticationService = {
   },
   logout: () => {
     // Remove the user to log out the user
-    localStorage.removeItem("user");
+    localStorage.removeItem('user');
   },
   getCurrentUser: async () => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem('user');
     if (!user) return null;
     return JSON.parse(user);
   },

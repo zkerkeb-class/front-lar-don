@@ -26,6 +26,11 @@ const Login = () => {
       });
   };
 
+  const handleGoogleLogin = () => {
+    // URL codée en dur pour l'authentification Google
+    window.location.href = "http://localhost:3005/auth/google";
+  };
+
   return (
     <div id="login">
       <form>
@@ -56,6 +61,13 @@ const Login = () => {
         <div className="flex items-center justify-between">
           <Button type="button" onClick={() => handleSubmit}>
             Se connecter
+          </Button>
+          <Button
+            type="button"
+            onClick={() => handleGoogleLogin}
+            style={{ backgroundColor: "#4285F4", color: "white" }}
+          >
+            Connexion avec Google
           </Button>
           <LardonLink to="/register">
             Pas encore de compte ? S'inscrire
