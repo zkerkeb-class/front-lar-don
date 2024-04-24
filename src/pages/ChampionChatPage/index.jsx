@@ -72,7 +72,7 @@ const ChampionChatPage = () => {
         const data = await response.json();
 
         setMessages(data.messageHistory);
-        setChatId(data.chatId);
+        setChatId(data._id);
         setIsTyping(false);
       } catch (error) {
         console.error("Erreur lors de l'envoi du message:", error);
