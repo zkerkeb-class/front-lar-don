@@ -17,6 +17,7 @@ import Home from "./pages/Home";
 import ConfirmSubscription from "./pages/ConfirmSubscription";
 import ChampSelect from "./pages/ChampSelect";
 import ChampionChatPage from "./pages/ChampionChatPage";
+import GoogleAuthSuccess from "./pages/GoogleAuthSuccess";
 
 const App = () => {
   return (
@@ -37,26 +38,14 @@ const RouterContent = () => {
     setIsLogged(AuthenticationService.isAuthenticated());
   }, [location]);
 
-  useEffect(() => {
-    // Ajuster pour permettre l'accès à Home même quand déconnecté
-    if (
-      !isLogged &&
-      location.pathname !== "/login" &&
-      location.pathname !== "/register" &&
-      location.pathname !== "/home" // Permettre d'accéder à Home
-    ) {
-      navigate("/login");
-    }
-  }, [isLogged, location.pathname]); // Écouter aussi les changements de location.pathname
-
   return (
     <div
-      className={"p-6 bg-slate-200 min-h-screen " + (isLogged ? "mt-16" : "")}
+      className={"p-6 mt-24 bg-slate-200 min-h-screen " + (isLogged ? "mt-16" : "")}
     >
       <Navbar
         navigation={[
           { to: "/home", label: "Accueil" },
-          { to: "/plans", label: "Plans" },
+          { to: "/plans", label: "Tarifs" },
           { to: "/champselect", label: "Champions" },
         ]}
       />
@@ -78,6 +67,7 @@ const RouterContent = () => {
         <Route path="/confirm-subscription" element={<ConfirmSubscription />} />
         <Route path="/champselect" element={<ChampSelect />} />
         <Route path="/champion/:championId" element={<ChampionChatPage />} />
+        <Route path="/google-auth-success" element={<GoogleAuthSuccess />} />
       </Routes>
     </div>
   );
