@@ -107,7 +107,7 @@ const ChampionChatPage = () => {
               }}
             ></div>
             <div className="messages">
-              {messages.map((message, index) => (
+              {messages.slice(1).map((message, index) => (
                 <div key={index} className={`message ${message.role}`}>
                   <div className="text">{message.content}</div>
                 </div>
