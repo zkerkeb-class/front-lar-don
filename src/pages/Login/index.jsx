@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert";
 
 const Login = () => {
-  const [identifier, setIdentifier] = useState(""); // Renommez 'email' en 'identifier' pour plus de clarté
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -26,21 +26,24 @@ const Login = () => {
       });
   };
 
+  const handleGoogleLogin = () => {
+    // URL codée en dur pour l'authentification Google
+    window.location.href = "http://localhost:3005/auth/google";
+  };
+
   return (
     <div id="login">
       <form>
         <Title level="2">Connexion</Title>
-
         <div className="mb-4">
           <Input
-            label="Identifiant ou Email" // Mettez à jour le label pour refléter le changement
-            type="text" // Modifiez le type en 'text' pour accepter les deux formats
+            label="Identifiant ou Email"
+            type="text"
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
             required
           />
         </div>
-
         <div className="mb-6">
           <Input
             label="Mot de passe"
@@ -50,12 +53,17 @@ const Login = () => {
             required
           />
         </div>
-
         {error && <Alert type="error">{error}</Alert>}
-
         <div className="flex items-center justify-between">
           <Button type="button" onClick={() => handleSubmit}>
             Se connecter
+          </Button>
+          <Button
+            type="button"
+            onClick={() => handleGoogleLogin}
+            style={{ backgroundColor: "#4285F4", color: "white" }}
+          >
+            Connexion avec Google
           </Button>
           <LardonLink to="/register">
             Pas encore de compte ? S'inscrire

@@ -1,28 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import "./ChampionChatPage.css"; // S'assure que le fichier CSS est importé
+import "./ChampionChatPage.css"; // Assurez-vous que le fichier CSS est importé
+
+const API_URL = "http://localhost:4004/chat"; // Remplacez par l'URL réelle de votre API
 
 const ChampionChatPage = () => {
-  // On récupère l'ID du champion depuis les paramètres de l'URL
   const { championId } = useParams();
-
-  // Les états pour gérer les informations du champion, le chargement, les messages et le nouveau message
   const [champion, setChampion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [chatId, setChatId] = useState("");
+  const messagesEndRef = useRef(null);
 
-  // useEffect pour charger les données du champion dès que le composant est monté
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
-    // Fonction asynchrone pour charger les données du champion depuis l'API
+    // Faire défiler à chaque mise à jour de l'historique des messages
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
     const fetchChampion = async () => {
       const url = `https://ddragon.leagueoflegends.com/cdn/14.8.1/data/fr_FR/champion/${championId}.json`;
       try {
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         setChampion(Object.values(data.data)[0]);
         setLoading(false);
+        handleStartChat(Object.values(data.data)[0]); // Initialisez le chat ici avec les infos du champion
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données du champion:",
@@ -35,28 +47,70 @@ const ChampionChatPage = () => {
     fetchChampion();
   }, [championId]);
 
-  // Fonction pour simuler l'envoi d'un message et recevoir une réponse automatique.
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (newMessage.trim()) {
-      setMessages([...messages, { text: newMessage.trim(), sender: "user" }]);
-      setIsTyping(true); // Commencer l'animation d'écriture
+    const trimmedMessage = newMessage.trim();
+    if (trimmedMessage) {
+      setMessages([...messages, { role: "user", content: trimmedMessage }]);
+      setIsTyping(true);
 
-      setTimeout(() => {
-        setIsTyping(false); // Arrêter l'animation d'écriture avant d'afficher le message
-        const botMessage = {
-          text: `Vous avez dit : "${newMessage.trim()}"? Intéressant.`,
-          sender: "champion",
-          profilePic: `https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/${champion.image.full}`,
-        };
-        setMessages((messages) => [...messages, botMessage]);
-      }, 2000); // Laissez un délai de 2 secondes pour simuler l'écriture
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: trimmedMessage,
+            champion: champion.name,
+            chatId: chatId,
+          }),
+        });
 
-      setNewMessage("");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        setMessages(data.messageHistory);
+        setChatId(data.chatId);
+        setIsTyping(false);
+      } catch (error) {
+        console.error("Erreur lors de l'envoi du message:", error);
+      } finally {
+        setNewMessage("");
+      }
     }
   };
 
-  // Rendu du composant
+  // Cette fonction envoie le premier message système pour initialiser le rôle de l'IA
+  const handleStartChat = async (championData) => {
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: `Initialisation du rôle de l'IA pour le champion: ${championData.id}`,
+          champion: championData.name,
+          chatId: "", // Envoyer un chatId vide pour commencer une nouvelle conversation
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setMessages(data.messageHistory);
+      setChatId(data.chatId);
+    } catch (error) {
+      console.error("Erreur lors de l'initialisation du chat:", error);
+    }
+  };
+
   return (
     <div className="chat-container">
       {loading ? (
@@ -83,8 +137,8 @@ const ChampionChatPage = () => {
             ></div>
             <div className="messages">
               {messages.map((message, index) => (
-                <div key={index} className={`message ${message.sender}`}>
-                  <div className="text">{message.text}</div>
+                <div key={index} className={`message ${message.role}`}>
+                  <div className="text">{message.content}</div>
                 </div>
               ))}
               {isTyping && (
@@ -92,6 +146,7 @@ const ChampionChatPage = () => {
                   Le champion est en train d'écrire...
                 </div>
               )}
+              <div ref={messagesEndRef} />
             </div>
             <form onSubmit={handleSendMessage} className="send-message-form">
               <input

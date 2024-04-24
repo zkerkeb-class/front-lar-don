@@ -70,6 +70,28 @@
   .message.champion .text {
     background-color: #eee;
   }
+
+  /* Style pour les messages de l'assistant. */
+.message.assistant .text {
+    color: #f1f1f1; /* Couleur de texte claire pour une meilleure lisibilité sur fond sombre */
+    background-color: rgba(0, 0, 0, 0.7); /* Fond sombre semi-transparent */
+    border: 1px solid #444; /* Bordure pour distinguer le message */
+    margin-right: 10px; /* Espacement à droite */
+    position: relative; /* Nécessaire pour le positionnement du pseudo-élément */
+  }
+  
+  /* Ajoute un pseudo-élément pour simuler une bulle de chat. */
+  .message.assistant .text::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -10px; /* Ajustez en fonction de l'apparence */
+    width: 0;
+    height: 0;
+    border: 5px solid transparent; /* Crée une forme de triangle */
+    border-left-color: rgba(0, 0, 0, 0.7); /* Couleur correspondant au fond du message */
+    transform: translateY(-50%);
+  }
   
   /* Style pour la photo de profil à côté des messages du champion. */
   .profile-pic {
@@ -78,12 +100,23 @@
     border-radius: 20px;
     margin-right: 10px;
   }
+  .message.champion .text {
+    background-color: #f0f0f0; /* Couleur de fond plus claire pour contraster avec l'arrière-plan */
+    color: #333; /* Couleur de texte plus foncée pour une meilleure lisibilité */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile pour du relief */
+    font-weight: 500; /* Un peu plus de poids pour le texte */
+    border: 1px solid #ddd; /* Bordure discrète pour délimiter */
+  }
   
   /* Style pour le texte du message. */
   .text {
     padding: 0.5rem 1rem;
     border-radius: 20px;
+    font-size: 1rem; /* Taille de police standard */
+    max-width: 80%; /* Largeur maximale pour ne pas déborder */
+    word-wrap: break-word; /* S'assurer que le texte passe à la ligne */
   }
+  
   
   /* Style pour le formulaire d'envoi de message. */
   .send-message-form {
@@ -115,11 +148,10 @@
   }
 
   /* Ajoutez ce style pour l'animation de saisie du bot */
+/* Ajustements pour la lisibilité de l'animation d'écriture du bot */
 .bot-writing-animation {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: #666;
+    color: #888; /* Couleur plus discrète */
+    font-style: italic; /* Style italique pour indiquer une action en cours */
   }
   
   @keyframes typing {
