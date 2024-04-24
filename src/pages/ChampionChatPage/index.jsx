@@ -1,24 +1,27 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
-import "./ChampionChatPage.css";
+import React, { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import './ChampionChatPage.css';
 
-const API_URL = "http://localhost:4004/chat";
+const API_URL = 'http://localhost:4004/chat';
 
 const ChampionChatPage = () => {
   const { championId } = useParams();
   const [champion, setChampion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [chatId, setChatId] = useState("");
-  const messagesEndRef = useRef(null);
+  const [chatId, setChatId] = useState('');
+  const chatboxRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatboxRef?.current?.scrollHeight) {
+      chatboxRef.current.scrollTo(0, chatboxRef.current.scrollHeight)
+    }
   };
 
   useEffect(() => {
+    console.log('messages:', messages);
     scrollToBottom();
   }, [messages]);
 
@@ -35,7 +38,7 @@ const ChampionChatPage = () => {
         setLoading(false);
       } catch (error) {
         console.error(
-          "Erreur lors de la récupération des données du champion:",
+          'Erreur lors de la récupération des données du champion:',
           error
         );
         setLoading(false);
@@ -48,15 +51,16 @@ const ChampionChatPage = () => {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     const trimmedMessage = newMessage.trim();
+    setNewMessage('');
     if (trimmedMessage) {
-      setMessages([...messages, { role: "user", content: trimmedMessage }]);
+      setMessages([...messages, { role: 'user', content: trimmedMessage }]);
       setIsTyping(true);
 
       try {
         const response = await fetch(API_URL, {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             message: trimmedMessage,
@@ -76,58 +80,55 @@ const ChampionChatPage = () => {
         setIsTyping(false);
       } catch (error) {
         console.error("Erreur lors de l'envoi du message:", error);
-      } finally {
-        setNewMessage("");
       }
     }
   };
 
   return (
-    <div className="chat-container">
+    <div className='chat-container'>
       {loading ? (
         <div>Chargement des données du champion...</div>
       ) : (
         champion && (
           <>
-            <div className="chat-header">
+            <div className='chat-header'>
               <img
-                className="champion-icon"
+                className='champion-icon'
                 src={`https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/${champion.image.full}`}
                 alt={champion.name}
               />
               <div>
-                <h1 className="champion-name">{champion.name}</h1>
-                <h2 className="champion-title">{champion.title}</h2>
+                <h1 className='champion-name'>{champion.name}</h1>
+                <h2 className='champion-title'>{champion.title}</h2>
               </div>
             </div>
             <div
-              className="chat-background"
+              className='chat-background'
               style={{
                 backgroundImage: `url(https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championId}_0.jpg)`,
               }}
             ></div>
-            <div className="messages">
+            <div className='messages' ref={chatboxRef}>
               {messages.slice(1).map((message, index) => (
                 <div key={index} className={`message ${message.role}`}>
-                  <div className="text">{message.content}</div>
+                  <div className='text'>{message.content}</div>
                 </div>
               ))}
               {isTyping && (
-                <div className="typing-indicator">
+                <div className='typing-indicator'>
                   Le champion est en train d'écrire...
                 </div>
               )}
-              <div ref={messagesEndRef} />
             </div>
-            <form onSubmit={handleSendMessage} className="send-message-form">
+            <form onSubmit={handleSendMessage} className='send-message-form'>
               <input
-                type="text"
+                type='text'
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Tapez votre message ici..."
-                className="message-input"
+                placeholder='Tapez votre message ici...'
+                className='message-input'
               />
-              <button type="submit" className="send-button">
+              <button type='submit' className='send-button'>
                 Envoyer
               </button>
             </form>

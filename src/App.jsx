@@ -40,7 +40,7 @@ const RouterContent = () => {
 
   return (
     <div
-      className={"p-6 mt-24 bg-slate-200 min-h-screen " + (isLogged ? "mt-16" : "")}
+      className={"p-6 mt-24 bg-slate-200 " + (isLogged ? "mt-16" : "")}
     >
       <Navbar
         navigation={[
