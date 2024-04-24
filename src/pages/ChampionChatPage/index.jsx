@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import "./ChampionChatPage.css"; // Assurez-vous que le fichier CSS est importé
+import "./ChampionChatPage.css";
 
-const API_URL = "http://localhost:4004/chat"; // Remplacez par l'URL réelle de votre API
+const API_URL = "http://localhost:4004/chat";
 
 const ChampionChatPage = () => {
   const { championId } = useParams();
@@ -19,7 +19,6 @@ const ChampionChatPage = () => {
   };
 
   useEffect(() => {
-    // Faire défiler à chaque mise à jour de l'historique des messages
     scrollToBottom();
   }, [messages]);
 
@@ -34,7 +33,6 @@ const ChampionChatPage = () => {
         const data = await response.json();
         setChampion(Object.values(data.data)[0]);
         setLoading(false);
-        handleStartChat(Object.values(data.data)[0]); // Initialisez le chat ici avec les infos du champion
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données du champion:",
@@ -81,33 +79,6 @@ const ChampionChatPage = () => {
       } finally {
         setNewMessage("");
       }
-    }
-  };
-
-  // Cette fonction envoie le premier message système pour initialiser le rôle de l'IA
-  const handleStartChat = async (championData) => {
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: `Initialisation du rôle de l'IA pour le champion: ${championData.id}`,
-          champion: championData.name,
-          chatId: "", // Envoyer un chatId vide pour commencer une nouvelle conversation
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setMessages(data.messageHistory);
-      setChatId(data.chatId);
-    } catch (error) {
-      console.error("Erreur lors de l'initialisation du chat:", error);
     }
   };
 
