@@ -64,7 +64,7 @@ const ChampionChatPage = () => {
           },
           body: JSON.stringify({
             message: trimmedMessage,
-            champion: champion.name,
+            champion: champion.id,
             chatId: chatId,
           }),
         });
