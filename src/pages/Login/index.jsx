@@ -28,7 +28,7 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     // URL codée en dur pour l'authentification Google
-    window.location.href = "http://localhost:3005/auth/google";
+    window.location.href = "http://localhost:4001/auth/google";
   };
 
   return (
