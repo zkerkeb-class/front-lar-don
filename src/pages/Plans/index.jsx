@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import Text from "../../components/Text";
 import Title from "../../components/Title";
 import "https://js.stripe.com/v3/pricing-table.js";
-import AuthenticationService from "../../services/auth-service";
+import UsersService from "../../services/users-service";
 
 const Plans = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    AuthenticationService.getCurrentUser().then((user) => {
+    UsersService.getCurrentUser().then((user) => {
       setUser(user);
     });
   }, []);
 
   return (
-    <div id="plans" className="min-h-screen bg-gray-100 py-12">
+    <div id="plans" className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         <Title className="text-4xl font-bold text-center text-gray-800 mb-6">
           Tarifs

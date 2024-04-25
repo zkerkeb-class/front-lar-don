@@ -19,7 +19,7 @@ const Login = () => {
       password: password,
     })
       .then(() => {
-        navigate("/plans");
+        navigate("/home");
       })
       .catch((error) => {
         setError(error?.response?.data?.message);

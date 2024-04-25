@@ -42,11 +42,6 @@ const AuthenticationService = {
     // Remove the user to log out the user
     localStorage.removeItem('user');
   },
-  getCurrentUser: async () => {
-    const user = localStorage.getItem('user');
-    if (!user) return null;
-    return JSON.parse(user);
-  },
 };
 
 export default AuthenticationService;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import UsersService from '../../services/users-service';
 
 const ChampSelect = () => {
   const [champions, setChampions] = useState([]);
@@ -14,22 +15,30 @@ const ChampSelect = () => {
   });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchChampions = async () => {
-      const url =
-        'https://ddragon.leagueoflegends.com/cdn/14.8.1/data/fr_FR/champion.json';
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setChampions(Object.values(data.data));
-        setLoading(false);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des champions:', error);
-        setLoading(false);
-      }
-    };
+  const fetchChampions = async () => {
+    const url =
+      'https://ddragon.leagueoflegends.com/cdn/14.8.1/data/fr_FR/champion.json';
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setChampions(Object.values(data.data));
+      setLoading(false);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des champions:', error);
+      setLoading(false);
+    }
+  };
 
+  const getUserSubscription = async () => {
+    const user = await UsersService.getCurrentUser();
+    if (!user) return null;
+    console.log('user:', user);
+    return user.subscriptionId;
+  };
+
+  useEffect(() => {
     fetchChampions();
+    getUserSubscription();
   }, []);
 
   useEffect(() => {

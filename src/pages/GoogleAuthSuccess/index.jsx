@@ -12,16 +12,12 @@ const GoogleAuthSuccess = () => {
     const googleId = urlParams.get('googleId');
     AuthenticationService.loginWithGoogle({ email, name, googleId }).then(
       () => {
-        navigate('/plans');
+        navigate('/home');
       }
     );
   }, []);
 
-  return (
-    <div>
-      <h1>Google Auth Success</h1>
-    </div>
-  );
+  return <></>;
 };
 
 export default GoogleAuthSuccess;
