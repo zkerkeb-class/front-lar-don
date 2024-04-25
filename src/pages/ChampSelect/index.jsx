@@ -13,6 +13,8 @@ const ChampSelect = () => {
     x: 0,
     y: 0,
   });
+  const [hasSubscription, setHasSubscription] = useState(false);
+
   const navigate = useNavigate();
 
   const fetchChampions = async () => {
@@ -29,15 +31,15 @@ const ChampSelect = () => {
     }
   };
 
-  const getUserSubscription = async () => {
-    const user = await UsersService.getCurrentUser();
-    if (!user) return null;
-    return user.subscriptionId;
+  const getSubscription = async () => {
+    UsersService.getUserSubscription().then((response) => {
+      setHasSubscription(response.id == 'prod_PZcx0WcDVQLyfr');
+    });
   };
 
   useEffect(() => {
     fetchChampions();
-    getUserSubscription();
+    getSubscription();
   }, []);
 
   useEffect(() => {
@@ -109,12 +111,25 @@ const ChampSelect = () => {
             setHoveredChampion(champion);
           }}
           onMouseLeave={() => setHoveredChampion(null)}
-          style={{ display: 'inline-block', margin: '10px', cursor: 'pointer' }}
+          style={{
+            display: 'inline-block',
+            margin: '10px',
+            cursor: 'pointer',
+            pointerEvents:
+              hasSubscription || champion.id == 'Aatrox' ? 'auto' : 'none',
+          }}
         >
           <img
             src={`https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/${champion.image.full}`}
             alt={champion.name}
-            style={{ width: '100px', height: '100px' }}
+            style={{
+              width: '100px',
+              height: '100px',
+              filter:
+                hasSubscription || champion.id == 'Aatrox'
+                  ? 'none'
+                  : 'grayscale(100%)',
+            }}
           />
         </div>
       ))}
