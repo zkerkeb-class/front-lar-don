@@ -32,7 +32,6 @@ const ChampSelect = () => {
   const getUserSubscription = async () => {
     const user = await UsersService.getCurrentUser();
     if (!user) return null;
-    console.log('user:', user);
     return user.subscriptionId;
   };
 
@@ -86,12 +85,12 @@ const ChampSelect = () => {
           placeholder='Rechercher...'
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ margin: '10px' }}
+          className='border border-lolDark rounded-lg p-1 mr-2 h-8 outline-none'
         />
         <select
           value={selectedCategory}
           onChange={handleCategoryChange}
-          style={{ margin: '10px' }}
+          className='border border-lolDark rounded-lg p-1 h-8 outline-none'
         >
           <option value='All'>Toutes les catégories</option>
           <option value='Fighter'>Combattant</option>
@@ -147,6 +146,8 @@ const ChampSelect = () => {
           <img
             src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${hoveredChampion.id}_0.jpg`}
             alt={hoveredChampion.name}
+            height={283}
+            width={480}
             style={{ width: '480px', maxWidth: 'unset', minWidth: '480px' }}
           />
           <h2 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>

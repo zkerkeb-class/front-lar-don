@@ -7,17 +7,24 @@ const UsersService = {
     if (!user) return null;
     return JSON.parse(user);
   },
-  updateSubscription: async (body) => {
-    const user = await UsersService.getCurrentUser();
+  getUserSubscription: async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
     if (!user) return null;
-    user.subscriptionId = body.subscriptionId;
-    console.log('user:', user);
+
     return await httpService
-      .put(`/users/${user._id}`, user)
-      .then((response) => {
-        console.log('User updated:', response.data);
-        // saveUser(response.data);
-        return response;
+      .get(`/users/${user.stripeId}/subscription`)
+      .then(async (response) => {
+        const subscription = response.data;
+
+        return await httpService
+          .put(`/users/${user._id}`, {
+            ...user,
+            subscriptionId: subscription.id,
+          })
+          .then((response) => {
+            saveUser(response.data);
+            return subscription;
+          });
       });
   },
 };

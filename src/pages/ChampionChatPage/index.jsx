@@ -21,7 +21,6 @@ const ChampionChatPage = () => {
   };
 
   useEffect(() => {
-    console.log('messages:', messages);
     scrollToBottom();
   }, [messages]);
 
@@ -126,9 +125,9 @@ const ChampionChatPage = () => {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder='Tapez votre message ici...'
-                className='message-input'
+                className='message-input outline-none rounded-s'
               />
-              <button type='submit' className='send-button'>
+              <button type='submit' className='send-button rounded-e'>
                 Envoyer
               </button>
             </form>
