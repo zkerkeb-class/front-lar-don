@@ -74,7 +74,7 @@ const ChampionChatPage = () => {
 
         const data = await response.json();
 
-        setMessages(data.messageHistory);
+        setMessages(data.messageHistory?.filter((message) => message.role !== 'system'));
         setChatId(data._id);
         setIsTyping(false);
       } catch (error) {
@@ -108,7 +108,7 @@ const ChampionChatPage = () => {
               }}
             ></div>
             <div className='messages' ref={chatboxRef}>
-              {messages.slice(1).map((message, index) => (
+              {messages.map((message, index) => (
                 <div key={index} className={`message ${message.role}`}>
                   <div className='text'>{message.content}</div>
                 </div>
