@@ -5,7 +5,7 @@ import 'https://js.stripe.com/v3/pricing-table.js';
 import UsersService from '../../services/users-service';
 
 const Plans = () => {
-  const [user, setUser] = useState({});
+  const [customerSecretId, setCustomerSecretId] = useState({});
   const [plan, setPlan] = useState('');
 
   const getSubscription = async () => {
@@ -14,15 +14,15 @@ const Plans = () => {
     });
   };
 
-  const getCurrentUser = async () => {
-    UsersService.getCurrentUser().then((user) => {
-      setUser(user);
+  const getCustomerSecretId = async () => {
+    UsersService.getCustomerSecretId().then((response) => {
+      setCustomerSecretId(response.customerSecretId);
     });
   };
 
   useEffect(() => {
     getSubscription();
-    getCurrentUser();
+    getCustomerSecretId();
   }, []);
 
   return (
@@ -37,10 +37,12 @@ const Plans = () => {
           proposons :
         </Text>
 
-        {user?.stripeId ? (
+        {plan && customerSecretId ? (
           <div className='pricing-table-wrapper'>
             {plan ? (
-              <Title className='text-center'>Vous avez actuellement le {plan.toLowerCase()}</Title>
+              <Title className='text-center'>
+                Vous avez actuellement le {plan.toLowerCase()}
+              </Title>
             ) : (
               <></>
             )}
@@ -49,7 +51,7 @@ const Plans = () => {
               className='stripe-pricing-table'
               pricing-table-id='prctbl_1P9O0HDWGS6KsEMg1b3EMTUa'
               publishable-key='pk_test_51OkSH5DWGS6KsEMgBrRmVZolxOvGhkKW4LQknuB4fZSCrfJlMfm3WYiVNz06oN1RuWQFjXibcXmMHSQAEOUSfXrk002RSmIE1Q'
-              customer-session-client-secret={user.customerSecretId}
+              customer-session-client-secret={customerSecretId}
             ></stripe-pricing-table>
           </div>
         ) : (

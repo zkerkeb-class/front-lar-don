@@ -5,6 +5,7 @@ const httpService = axios.create({
   timeout: 5000, // Set a timeout value in milliseconds
   headers: {
     'Content-Type': 'application/json', // Set the default content type
+    Authorization: `Bearer ${localStorage.getItem('token')}`, // Set the default Authorization token
   },
   validateStatus: function (status) {
     return status < 400;

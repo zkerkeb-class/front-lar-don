@@ -9,12 +9,9 @@ const GoogleAuthSuccess = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get('email');
     const name = urlParams.get('name');
-    const googleId = urlParams.get('googleId');
-    AuthenticationService.loginWithGoogle({ email, name, googleId }).then(
-      () => {
-        navigate('/home');
-      }
-    );
+    AuthenticationService.loginWithGoogle({ email, name }).then(() => {
+      navigate('/home');
+    });
   }, []);
 
   return <></>;
