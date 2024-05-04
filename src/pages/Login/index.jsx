@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   const handleGithubLogin = () => {
-    window.location.href = 'http://localhost:4001/auth/google';
+    window.location.href = 'http://localhost:4001/auth/github';
   };
 
   return (
