@@ -18,8 +18,7 @@ const ChampSelect = () => {
   const navigate = useNavigate();
 
   const fetchChampions = async () => {
-    const url =
-      `${process.env.REACT_APP_LOL_API}/champion.json`;
+    const url = `${process.env.REACT_APP_LOL_API}/champion.json`;
     try {
       const response = await fetch(url);
       const data = await response.json();
