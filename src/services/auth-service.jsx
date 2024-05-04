@@ -17,7 +17,8 @@ const AuthenticationService = {
     return await httpService
       .post('/users/login-google', body)
       .then((response) => {
-        setToken(response.data.user);
+        setToken(response.data.token);
+        setUser(response.data.data);
         return response;
       });
   },
