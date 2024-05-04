@@ -62,6 +62,40 @@ const UsersService = {
         return response;
       });
   },
+  updatePhoneNumber: async (phoneNumber) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return null;
+
+    return await httpService
+      .put(`/users/${user._id}/phone-number`, {
+        phoneNumber,
+      })
+      .then((response) => {
+        setUser(response.data.data);
+        setToken(response.data.token);
+        return response.data;
+      });
+  },
+  resetPassword: async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return null;
+
+    return await httpService
+      .post(`/users/${user._id}/reset-password`)
+      .then((response) => {
+        return response.data;
+      });
+  },
+  verifyResetPasswordToken: async (body) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return null;
+
+    return await httpService
+      .post(`/users/${user._id}/verify-reset-password`, body)
+      .then((response) => {
+        return response.data;
+      });
+  },
 };
 
 export default UsersService;
