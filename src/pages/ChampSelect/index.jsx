@@ -19,7 +19,7 @@ const ChampSelect = () => {
 
   const fetchChampions = async () => {
     const url =
-      'https://ddragon.leagueoflegends.com/cdn/14.8.1/data/fr_FR/champion.json';
+      `${process.env.REACT_APP_LOL_API}/champion.json`;
     try {
       const response = await fetch(url);
       const data = await response.json();

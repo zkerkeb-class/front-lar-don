@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './ChampionChatPage.css';
 
-const API_URL = 'http://localhost:4004/chat';
-
 const ChampionChatPage = () => {
   const { championId } = useParams();
   const [champion, setChampion] = useState(null);
@@ -26,7 +24,7 @@ const ChampionChatPage = () => {
 
   useEffect(() => {
     const fetchChampion = async () => {
-      const url = `https://ddragon.leagueoflegends.com/cdn/14.8.1/data/fr_FR/champion/${championId}.json`;
+      const url = `${process.env.REACT_APP_LOL_API}/champion/${championId}.json`;
       try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -54,9 +52,8 @@ const ChampionChatPage = () => {
     if (trimmedMessage) {
       setMessages([...messages, { role: 'user', content: trimmedMessage }]);
       setIsTyping(true);
-
       try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${process.env.REACT_APP_URL_AI}/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -27,15 +27,15 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:4001/auth/google';
+    window.location.href = `${process.env.REACT_APP_URL_OAUTH}/auth/google`;
   };
 
   const handleDiscordLogin = () => {
-    window.location.href = 'http://localhost:4001/auth/discord';
+    window.location.href = `${process.env.REACT_APP_URL_OAUTH}/auth/discord`;
   };
 
   const handleGithubLogin = () => {
-    window.location.href = 'http://localhost:4001/auth/github';
+    window.location.href = `${process.env.REACT_APP_URL_OAUTH}/auth/github`;
   };
 
   return (
