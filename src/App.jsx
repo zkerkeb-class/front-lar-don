@@ -18,6 +18,8 @@ import ConfirmSubscription from "./pages/ConfirmSubscription";
 import ChampSelect from "./pages/ChampSelect";
 import ChampionChatPage from "./pages/ChampionChatPage";
 import GoogleAuthSuccess from "./pages/GoogleAuthSuccess";
+import DiscordAuthSuccess from "./pages/DiscordAuthSuccess";
+import GithubAuthSuccess from "./pages/GithubAuthSuccess";
 
 const App = () => {
   return (
@@ -68,6 +70,8 @@ const RouterContent = () => {
         <Route path="/champselect" element={<ChampSelect />} />
         <Route path="/champion/:championId" element={<ChampionChatPage />} />
         <Route path="/google-auth-success" element={<GoogleAuthSuccess />} />
+        <Route path="/discord-auth-success" element={<DiscordAuthSuccess />} />
+        <Route path="/github-auth-success" element={<GithubAuthSuccess />} />
       </Routes>
     </div>
   );

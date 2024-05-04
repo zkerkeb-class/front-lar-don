@@ -30,6 +30,14 @@ const Login = () => {
     window.location.href = 'http://localhost:4001/auth/google';
   };
 
+  const handleDiscordLogin = () => {
+    window.location.href = 'http://localhost:4001/auth/discord';
+  };
+
+  const handleGithubLogin = () => {
+    window.location.href = 'http://localhost:4001/auth/google';
+  };
+
   return (
     <div id='login'>
       <form>
@@ -64,6 +72,23 @@ const Login = () => {
           >
             Connexion avec Google
           </Button>
+
+          <Button
+            type='button'
+            onClick={() => handleDiscordLogin}
+            style={{ backgroundColor: '#4285F4', color: 'white' }}
+          >
+            Connexion avec Discord
+          </Button>
+
+          <Button
+            type='button'
+            onClick={() => handleGithubLogin}
+            style={{ backgroundColor: '#4285F4', color: 'white' }}
+          >
+            Connexion avec Github
+          </Button>
+
           <LardonLink to='/register'>
             Pas encore de compte ? S'inscrire
           </LardonLink>

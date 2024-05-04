@@ -22,6 +22,24 @@ const AuthenticationService = {
         return response;
       });
   },
+  loginWithDiscord: async (body) => {
+    return await httpService
+      .post('/users/login-discord', body)
+      .then((response) => {
+        setToken(response.data.token);
+        setUser(response.data.data);
+        return response;
+      });
+  },
+  loginWithGithub: async (body) => {
+    return await httpService
+      .post('/users/login-github', body)
+      .then((response) => {
+        setToken(response.data.token);
+        setUser(response.data.data);
+        return response;
+      });
+  },
   register: async (body) => {
     return await httpService.post(`/users/`, body).then((response) => {
       setToken(response.data.token);
