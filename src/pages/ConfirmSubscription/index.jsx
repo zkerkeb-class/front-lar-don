@@ -19,7 +19,7 @@ const ConfirmSubscription = () => {
   }, []);
 
   return (
-    <div className='flex items-center justify-center text-white p-6'>
+    <div className='flex items-center justify-center text-lolGold-2 p-6'>
       <div className='text-center'>
         <div className='animate-bounce mb-8'>
           <FontAwesomeIcon
@@ -30,10 +30,10 @@ const ConfirmSubscription = () => {
         <Title className='text-lolDark text-3xl mb-4'>
           Confirmation de votre abonnement
         </Title>
-        <Text className='text-xl text-black'>
+        <Text className='text-xl text-lolGold-2'>
           Vous vous êtes abonné au {plan.toLowerCase()}.
         </Text>
-        <Text className='text-xl text-black'>
+        <Text className='text-xl text-lolGold-2'>
           Vous avez maintenant accès à toutes les fonctionnalités de
           l'application.
         </Text>

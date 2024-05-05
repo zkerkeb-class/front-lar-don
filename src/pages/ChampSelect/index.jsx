@@ -86,12 +86,12 @@ const ChampSelect = () => {
           placeholder='Rechercher...'
           value={searchTerm}
           onChange={handleSearchChange}
-          className='border border-lolDark rounded-lg p-1 mr-2 h-8 outline-none'
+          className='bg-lolBlue-5 text-lolGold-2 border-2 border-lolGold-4 rounded mr-4 py-2 px-4 outline-none'
         />
         <select
           value={selectedCategory}
           onChange={handleCategoryChange}
-          className='border border-lolDark rounded-lg p-1 h-8 outline-none'
+          className='bg-lolBlue-5 text-lolGold-2 border-2 border-lolGold-4 rounded py-2 px-4 outline-none'
         >
           <option value='All'>Toutes les catégories</option>
           <option value='Fighter'>Combattant</option>
@@ -121,6 +121,7 @@ const ChampSelect = () => {
           <img
             src={`https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/${champion.image.full}`}
             alt={champion.name}
+            className='w-24 h-24 shadow-lg bg-lolBlue-6'
             style={{
               width: '100px',
               height: '100px',
@@ -134,17 +135,11 @@ const ChampSelect = () => {
       ))}
       {hoveredChampion && (
         <div
+          className='fixed touch-none pointer-events-none text-lolGold-2 p-5 text-center z-50 bg-lolGrey-black bg-opacity-95 border-lolBlue-2 rounded-lg shadow-lg'
           style={{
-            position: 'fixed',
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            border: '1px solid black',
-            padding: '20px',
+            border: '1px solid lolBlue-2',
             top: modalPosition.y,
             left: modalPosition.x,
-            color: 'white',
-            textAlign: 'center',
-            pointerEvents: 'none',
-            touchAction: 'none',
             transform:
               modalPosition.x > window.innerWidth / 2 &&
               modalPosition.y > window.innerHeight / 2
@@ -154,7 +149,6 @@ const ChampSelect = () => {
                 : modalPosition.y > window.innerHeight / 2
                 ? 'translate(0, -100%)'
                 : 'none',
-            zIndex: 1000, // Assurez-vous que le popup est au-dessus des autres éléments
           }}
         >
           <img

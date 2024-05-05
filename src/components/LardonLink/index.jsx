@@ -10,11 +10,7 @@ const LardonLink = ({
   return (
     <Link
       to={to}
-      className={
-        'transition-all duration-100 text-blue-500 ' +
-        (active ? ' active text-black ' : ' hover:text-slate-500 ') +
-        className
-      }
+      className={'transition-all duration-100 text-blue-500 ' + className}
       onClick={onClick}
     >
       {children}

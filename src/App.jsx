@@ -6,7 +6,6 @@ import {
   Navigate,
   useLocation,
 } from 'react-router-dom';
-import './App.css';
 import Plans from './pages/Plans';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
@@ -42,13 +41,13 @@ const RouterContent = () => {
   }, [location]);
 
   return (
-    <div className={'p-6 mt-24 bg-slate-200 ' + (isLogged ? 'mt-16' : '')}>
+    <div className={'p-6 mt-24 ' + (isLogged ? 'mt-16' : '')}>
       <Navbar
         navigation={[
-          { to: '/home', label: 'Accueil' },
-          { to: '/plans', label: 'Tarifs' },
-          { to: '/champselect', label: 'Champions' },
-          { to: '/account', label: 'Mon compte' },
+          { to: '/home', label: 'ACCUEIL' },
+          { to: '/plans', label: 'TARIFS' },
+          { to: '/champselect', label: 'CHAMPIONS' },
+          { to: '/account', label: 'MON COMPTE' },
         ]}
       />
       <Routes>

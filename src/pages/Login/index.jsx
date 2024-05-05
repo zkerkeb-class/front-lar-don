@@ -61,35 +61,23 @@ const Login = () => {
           />
         </div>
         {error && <Alert type='error'>{error}</Alert>}
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center gap-6'>
           <Button type='button' onClick={() => handleSubmit}>
             Se connecter
           </Button>
-          <Button
-            type='button'
-            onClick={() => handleGoogleLogin}
-            style={{ backgroundColor: '#4285F4', color: 'white' }}
-          >
+          <Button type='button' onClick={() => handleGoogleLogin}>
             Connexion avec Google
           </Button>
 
-          <Button
-            type='button'
-            onClick={() => handleDiscordLogin}
-            style={{ backgroundColor: '#4285F4', color: 'white' }}
-          >
+          <Button type='button' onClick={() => handleDiscordLogin}>
             Connexion avec Discord
           </Button>
 
-          <Button
-            type='button'
-            onClick={() => handleGithubLogin}
-            style={{ backgroundColor: '#4285F4', color: 'white' }}
-          >
+          <Button type='button' onClick={() => handleGithubLogin}>
             Connexion avec Github
           </Button>
 
-          <LardonLink to='/register'>
+          <LardonLink to='/register' className='ml-auto'>
             Pas encore de compte ? S'inscrire
           </LardonLink>
         </div>

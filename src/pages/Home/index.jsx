@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
-
-// Importez vos images (à remplacer par les chemins réels de vos images)
-import characterImage1 from '../../assets/character1.jpg';
-import characterImage2 from '../../assets/character2.jpg';
-import characterImage3 from '../../assets/character3.jpg';
+import Tutoriel from '../../assets/gif/tuto.gif';
 
 import UsersService from '../../services/users-service';
 import LardonLink from '../../components/LardonLink';
@@ -70,60 +64,34 @@ const Home = () => {
     <div className='container mx-auto px-4'>
       {!loadingUser && user && !isMailVerified && (
         <div>
-          <div className='bg-red-500 text-white p-4 text-center'>
+          <div className='bg-red-500 text-lolGold-2 p-4 text-center'>
             <p>
               Votre email n'a pas encore été vérifié. Veuillez vérifier votre
               boîte de réception pour le lien de vérification.
             </p>
 
-            <LardonLink className='font-bold text-white' to='#' onClick={() => sendConfirmEmail()}>
+            <LardonLink
+              className='font-bold text-lolGold-2'
+              to='#'
+              onClick={() => sendConfirmEmail()}
+            >
               Cliquez ici pour renvoyer un email de confirmation
             </LardonLink>
           </div>
         </div>
       )}
 
-      <section className='hero bg-lolDark text-white py-20'>
-        <div className='text-center'>
-          <h1 className='text-5xl font-bold'>
-            Bienvenue dans le monde de League of Legends IA
-          </h1>
-          <p className='text-xl mt-4'>
-            Dialoguez avec vos champions préférés grâce à notre IA avancée.
-          </p>
-        </div>
+      <section className='hero bg-lolDark text-lolGold-2'>
+        <h1 className='text-6xl font-bold font-serif'>
+          Bienvenue dans le monde de League of Legends IA
+        </h1>
+        <p className='text-xl mt-4'>
+          Dialoguez avec vos champions préférés grâce à notre IA avancée.
+        </p>
       </section>
 
       <section className='my-10'>
-        <Carousel
-          autoPlay
-          infiniteLoop
-          showThumbs={false}
-          showStatus={false}
-          className='carousel-container'
-        >
-          <div className='carousel-image-container'>
-            <img
-              src={characterImage1}
-              alt='Character 1'
-              className='carousel-image'
-            />
-          </div>
-          <div className='carousel-image-container'>
-            <img
-              src={characterImage2}
-              alt='Character 2'
-              className='carousel-image'
-            />
-          </div>
-          <div className='carousel-image-container'>
-            <img
-              src={characterImage3}
-              alt='Character 3'
-              className='carousel-image'
-            />
-          </div>
-        </Carousel>
+        <img src={Tutoriel} alt='Tutoriel' className='w-full' />
       </section>
 
       <section className='my-10'>
@@ -141,9 +109,11 @@ const Home = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className='bg-gray-100 py-10'>
+      <section className='bg-lolGold-2 py-10'>
         <div className='container mx-auto px-4'>
-          <h2 className='text-3xl font-bold text-center mb-6'>FAQ</h2>
+          <h2 className='text-3xl font-bold text-center text-lolBlue-7 mb-6'>
+            FAQ
+          </h2>
           <div>
             <FAQItem
               question="Comment interagir avec l'IA?"
@@ -163,19 +133,19 @@ const Home = () => {
         <div className='container mx-auto px-4'>
           <h2 className='text-3xl font-bold text-center mb-6'>Témoignages</h2>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-            <div className='text-center p-4 shadow-lg rounded-lg bg-white'>
-              <p className='text-lg font-semibold'>
+            <div className='text-center p-4 shadow-lg rounded-lg bg-lolGold-2'>
+              <p className='text-lg font-semibold text-lolBlue-6'>
                 "L'expérience avec l'IA était incroyable, j'ai vraiment senti
                 que j'étais en train de parler à Ashe!"
               </p>
-              <p className='mt-2 text-sm text-gray-600'>- Jean Dupont</p>
+              <p className='mt-2 text-sm text-lolBlue-6'>- Jean Dupont</p>
             </div>
-            <div className='text-center p-4 shadow-lg rounded-lg bg-white'>
-              <p className='text-lg font-semibold'>
+            <div className='text-center p-4 shadow-lg rounded-lg bg-lolGold-2'>
+              <p className='text-lg font-semibold text-lolBlue-6'>
                 "J'ai été surpris par la qualité des réponses, c'est comme si le
                 personnage était réel."
               </p>
-              <p className='mt-2 text-sm text-gray-600'>- Marie Curie</p>
+              <p className='mt-2 text-sm text-lolBlue-6'>- Marie Curie</p>
             </div>
           </div>
         </div>

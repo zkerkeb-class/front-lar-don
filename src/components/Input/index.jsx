@@ -23,7 +23,7 @@ const Input = ({
     <div className={className}>
       <label
         htmlFor={id}
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="block text-lolGold-2 text-sm font-bold mb-2"
       >
         {label}
         {required ? <span className="text-red-500"> *</span> : ""}
@@ -37,7 +37,7 @@ const Input = ({
         placeholder={placeholder}
         required={required}
         className={
-          "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " +
+          "shadow appearance-none border rounded w-full py-2 px-3 bg-lolGold-2 text-lolBlue-7 leading-tight focus:outline-none focus:shadow-outline " +
           className
         }
       />
