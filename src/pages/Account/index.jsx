@@ -81,7 +81,7 @@ const Account = () => {
           <>
             <p>
               Email: {user.email} (email{' '}
-              {user.emailConfirmed ? 'confirmé' : 'non confirmé'})
+              {user.isLive ? 'confirmé' : 'non confirmé'})
             </p>
             <p>Nom d'utilisateur: {user.username}</p>
             <p>
