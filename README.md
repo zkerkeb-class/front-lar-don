@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# League of Legends Chat Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description du service
 
-## Available Scripts 
+### Objectif
+Développer une application permettant aux utilisateurs de dialoguer avec les personnages de League of Legends grâce à une intelligence artificielle fournie par OpenAI. Les utilisateurs ont accès à un seul champion gratuitement et peuvent souscrire à un abonnement pour parler avec tous les personnages.
 
-In the project directory, you can run:
+### Fonctionnalités principales
+- **Dialogue interactif avec les personnages de League of Legends.**
+- **Intégration avec l'IA OpenAI pour générer des réponses réalistes.**
+- **Modèle économique freemium : accès gratuit à un champion et abonnement payant pour accéder à tous les personnages.**
+- **Utilisation des API pour gérer les dialogues, les données de personnages et l'authentification des utilisateurs.**
 
-### `npm start`
+## Membres du projet
+- **Lucas SEVAULT**
+- **Aubin OLIVRIE**
+- **Ryan PEYROT**
 
-Runs the app in the development mode.\
-Open [http://localhost:3001](http://localhost:3001) to view it in your browser.
+## Installation et configuration
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Exécutez `npm install`.
+2. Créez un fichier `.env` avec la configuration suivante :
 
-### `npm test`
+```env
+REACT_APP_URL_API=http://localhost:3000/bdd-api
+REACT_APP_URL_AI=http://localhost:4004
+REACT_APP_URL_OAUTH=http://localhost:4001
+REACT_APP_LOL_API=https://ddragon.leagueoflegends.com/cdn/14.8.1/data/fr_FR
+Lancement du projet
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Exécutez npm start pour démarrer l'application front-end.
