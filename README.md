@@ -11,6 +11,9 @@ Développer une application permettant aux utilisateurs de dialoguer avec les pe
 - **Modèle économique freemium : accès gratuit à un champion et abonnement payant pour accéder à tous les personnages.**
 - **Utilisation des API pour gérer les dialogues, les données de personnages et l'authentification des utilisateurs.**
 
+### Vidéo de Présentation
+Regardez la [vidéo de présentation](https://vimeo.com/947290399?share=copy) pour en savoir plus sur notre application.
+
 ## Membres du projet
 - **Lucas SEVAULT**
 - **Aubin OLIVRIE**
