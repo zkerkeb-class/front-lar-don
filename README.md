@@ -14,6 +14,8 @@ Développer une application permettant aux utilisateurs de dialoguer avec les pe
 ### Vidéo de Présentation
 Regardez la [vidéo de présentation](https://vimeo.com/947290399?share=copy) pour en savoir plus sur notre application.
 
+<img src="https://github.com/zkerkeb-class/front-lar-don/blob/main/public/image%20(2).png" width="256"/>
+
 ## Membres du projet
 - **Lucas SEVAULT**
 - **Aubin OLIVRIE**
